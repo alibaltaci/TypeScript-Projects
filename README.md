@@ -196,3 +196,46 @@ const Hello: FC<IHelloProps> = ( { name, description="desc", label } ) => {
       )
     }
 ```
+
+# Events 
+
+Eventlerin hangi tipi alacağını anlayabilmek için onChange 'e over yapıyoruz ve çıkan uyarıdaki `` ?: `` sonraki kısım bize eventin alacağı değer ile ilgili bilgi verir.
+
+Void 'den sonra return olmaz.
+
+Event 'e tip atamak event üzerinde özellikleri kullanmamıza olanak sağlar.  `` event.target.value ``
+
+```
+const Hello: React.FC<IHelloProps> = ( { name, description="desc" } ) => {
+    
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        event.target.value
+    };
+
+    return (
+      <div>
+        <h1>Hello {name} {description} </h1>
+        <input type="text" onChange={handleChange} />
+      </div>
+    )
+  }
+```
+
+Etiketimizi değiştirip tekrardan onChange 'e over yapılırsa, event 'imizin tipinin değiştitği görülecektir.
+
+```
+return (
+    <div>
+    <h1>Hello {name} {description} </h1>
+    <div onChange={handleChange} />
+    </div>
+)
+}
+```
+
+over onChange --> 
+
+```
+(property) React.DOMAttributes<HTMLDivElement>.onChange?: React.FormEventHandler<HTMLDivElement> | undefined
+```
+
