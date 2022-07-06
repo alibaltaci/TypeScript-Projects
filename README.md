@@ -239,3 +239,148 @@ over onChange -->
 (property) React.DOMAttributes<HTMLDivElement>.onChange?: React.FormEventHandler<HTMLDivElement> | undefined
 ```
 
+# Hooks
+
+## useState
+
+```
+const Hello: React.FC<IHelloProps> = ( { name, description="desc" } ) => {
+
+    const [data, setData] = useState(42);
+
+    setData(24);
+    
+    return (
+        <div>
+            <h1>Hello {name} {description} </h1>
+        </div>
+    )   
+}  
+```
+
+Type Inference sayesinde ``data`` ``number`` tipini alır. ``setData`` ile günellemek istediğimizde `` number `` bir değer ile devam etmek zorundayız.
+
+ `` | `` `` pipe `` ile birden fazla tip alabileceğini belirtelim. `` useState<number | string | null> ``
+
+ ```
+ const Hello: React.FC<IHelloProps> = ( { name, description="desc" } ) => {
+
+    const [data, setData] = useState<number | string | null>(42);
+
+    setData(24);
+    
+    return (
+        <div>
+            <h1>Hello {name} {description} </h1>
+        </div>
+    )   
+}  
+ ```
+
+## object type
+
+```
+const Hello: React.FC<IHelloProps> = ( { name, description="desc" } ) => {
+
+    const [data, setData] = useState< {age: number} >( {age: 42} );
+
+    setData({age: 99 });
+
+
+    return (
+        <div>
+            <h1>Hello {name} {description} </h1>
+        </div>
+    )   
+} 
+```
+
+## Object Type With Interface
+
+Object Type ile interface 'i birlikte kullanalım.
+
+```
+interface dataNode {
+    age: number | null; 
+    name?: string; 
+    department?: string | number;
+};
+
+const Hello: React.FC<IHelloProps> = ( { name, description="desc" } ) => {
+
+    const [data, setData] = useState< dataNode >( {age: 42, name: "Ali", department: "IT", } );
+
+    setData({age: 99 });
+
+
+    return (
+        <div>
+            <h1>Hello {name} {description} </h1>
+        </div>
+    )   
+}
+```
+
+# useRef
+
+Atayacağımız tipleri over yardımı ile görüyoruz.
+
+```
+const Hello: React.FC<IHelloProps> = ( { name, description="desc" } ) => {
+
+    const inputRef = useRef<HTMLInputElement>(null);
+    const divRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+
+    return (
+        <div ref={divRef}>
+            <h1>Hello {name} {description} </h1>
+            <input type="text" ref={inputRef} />
+            <button ref={buttonRef}> Button </button>
+        </div>
+    )   
+}
+```
+
+## useReducer
+
+```
+interface Note {
+    content: string;
+}
+
+type Actions = {type: "add", content: string} | {type: "remove", id: number}
+
+// type State = Note[];
+
+const NotesReducer = (state: Note[], action: Actions) => {
+    switch(action.type){
+        case "add":
+            return [...state, {content: action.content}]
+        case "remove":
+            return state.filter( (_ , i) => action.id !== i)
+        default:
+            return [...state];
+    }
+}
+
+const Hello: React.FC = ( {  } ) => {
+
+    const [notes, dispatch] = useReducer(NotesReducer, [])
+
+    return (
+        <div>
+            <h1>Hello</h1>
+            <button onClick={ () => {
+                dispatch({
+                    type: "add",
+                    content: "Note 1",
+                })
+            }}>Button </button>
+
+        </div>
+    )   
+}
+
+export default Hello;
+```

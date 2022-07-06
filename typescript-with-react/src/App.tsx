@@ -6,8 +6,10 @@ function App() {
     <div className="App">
       Hello TypeScript With React 
 
-      <Hello name = {"Ali"} />
+      {/* <Hello name = {"Ali"} /> */}
       {/* <Hello name = {"Ali"} onSmthHappen= {(name) => {console.log(name)}} /> */}
+
+      <Hello />
 
     </div>
   );
