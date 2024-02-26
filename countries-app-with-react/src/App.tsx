@@ -1,14 +1,15 @@
 import axios from "axios"
-import { Country } from "./types"
+import { CountryType } from "./types"
 import { useEffect, useState } from "react"
+import CountryComponent from "./components/CountryComponent"
 
 export default function App() {
 
-    const [countries, setCountries] = useState<Country[]>( [] )
+    const [countries, setCountries] = useState<CountryType[]>( [] )
 
     const getCountries = async() => {
         try {
-            const { data } = await axios.get<Country[]>("https://restcountries.com/v3.1/all")
+            const { data } = await axios.get<CountryType[]>("https://restcountries.com/v3.1/all")
             setCountries(data)
         } catch (error) {
             console.log("Hata: ", error)
@@ -20,7 +21,12 @@ export default function App() {
     }, [])
 
     console.log( {countries} )
+
   return (
-    <div>Countries App</div>
+    <div>
+        {countries.map( country =>{ 
+            return <CountryComponent key={country.name.official} country={country} />
+         })}
+    </div>
   )
 }
