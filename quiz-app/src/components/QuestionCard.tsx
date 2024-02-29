@@ -4,11 +4,11 @@ type Props = {
     question: string;
     answers: string[];
     callback: any;
-    userAnswer: any;
+    userAnswers: any;
     questionNr: number;
     totalQuestions: number;
 }
-const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, userAnswer, questionNr, totalQuestions}) => {
+const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, userAnswers, questionNr, totalQuestions}) => {
   return (
     <div>
         <p className="number">
@@ -17,9 +17,9 @@ const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, us
         <p dangerouslySetInnerHTML={{__html: question}} />
         <div>
             {
-                answers.map( el => (
+                answers?.map( el => (
                     <div key={el}>
-                        <button disabled={userAnswer} onClick={callback}>
+                        <button disabled={userAnswers} value={el} onClick={callback}>
                             <span dangerouslySetInnerHTML={{__html: el}} />
                         </button>
                     </div>
