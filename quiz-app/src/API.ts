@@ -1,17 +1,4 @@
-
-// {
-//     "type": "multiple",
-//     "difficulty": "easy",
-//     "category": "Animals",
-//     "question": "How many legs do butterflies have?",
-//     "correct_answer": "6",
-//     "incorrect_answers": [
-//         "2",
-//         "4",
-//         "0"
-//     ]
-// }
-
+import { API_BASE_URL } from "./constants";
 import { shuffleArray } from "./utils";
 
 export type Question = {
@@ -39,7 +26,7 @@ export enum Difficulty {
 
 export const fetchQuizQuestions = async(amount: number, difficulty: Difficulty) => {
 
-    const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
+    const endpoint = `${API_BASE_URL}?amount=${amount}&difficulty=${difficulty}&type=multiple`;
 
     const data = await(await fetch(endpoint)).json();
     // console.log(data)

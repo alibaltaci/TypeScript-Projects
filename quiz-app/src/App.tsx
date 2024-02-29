@@ -1,6 +1,7 @@
-import { TOTAL_QUESTIONS, useQuizFunctions } from "./QuizFunctions";
+import { useQuizFunctions } from "./QuizFunctions";
 import QuestionCard from "./components/QuestionCard"
 import Results from "./components/Results";
+import { TOTAL_QUESTIONS } from "./constants";
 
 const App = () => {
 

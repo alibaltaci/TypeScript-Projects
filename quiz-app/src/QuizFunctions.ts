@@ -1,5 +1,6 @@
 import {useState} from "react"
 import { Difficulty, QuestionState, fetchQuizQuestions } from "./API";
+import { TOTAL_QUESTIONS } from "./constants";
 
 export type AnswerObject = {
   question: string;
@@ -9,9 +10,8 @@ export type AnswerObject = {
   correctAnswer: string; 
 }
 
-export const TOTAL_QUESTIONS = 10
-
 export const useQuizFunctions = () => {
+  
     const [loading, setLoading] = useState<boolean>(false)
     const [questions, setQuestions] = useState<QuestionState[]>([])
     const [number, setNumber] = useState<number>(0)
