@@ -39,7 +39,7 @@ export const useQuizFunctions = () => {
     }
   
   
-    const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const checkAnswer = async(e: React.MouseEvent<HTMLButtonElement>) => {
       if(userAnswers.length !== TOTAL_QUESTIONS ){
   
         const answer = e.currentTarget.value;
@@ -57,6 +57,7 @@ export const useQuizFunctions = () => {
         }
   
         setUserAnswers( prev => [...prev, answerObject]);
+        await delay(2000)
         nextQuestion()
       }
     }

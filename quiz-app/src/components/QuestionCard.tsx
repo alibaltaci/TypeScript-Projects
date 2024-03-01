@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import { AnswerObject } from "../QuizFunctions";
+import { ButtonWrapper, QuestionCardWrapper } from "./QuestionCard.styles";
 
 type Props = {
     question: string;
@@ -11,7 +12,7 @@ type Props = {
 }
 const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, userAnswers, questionNr, totalQuestions}) => {
   return (
-    <div>
+    <QuestionCardWrapper>
         <p className="number">
             Question: {questionNr} / {totalQuestions}
         </p>
@@ -19,15 +20,19 @@ const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, us
         <div>
             {
                 answers?.map( el => (
-                    <div key={el}>
+                    <ButtonWrapper 
+                        key={el}
+                        correct={userAnswers?.correctAnswer === el}
+                        userClicked={userAnswers?.answer === el}
+                    >
                         <button disabled={!!userAnswers} value={el} onClick={callback}>
                             <span dangerouslySetInnerHTML={{__html: el}} />
                         </button>
-                    </div>
+                    </ButtonWrapper>
                 ) )
             }
         </div>
-    </div>
+    </QuestionCardWrapper>
   )
 }
 

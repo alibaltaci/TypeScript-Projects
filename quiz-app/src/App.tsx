@@ -14,7 +14,8 @@ const App = () => {
     score,
     gameOver,
     startTrivia,
-    checkAnswer  
+    checkAnswer,
+    // nextQuestion
   } = useQuizFunctions();
 
   return (
@@ -35,12 +36,12 @@ const App = () => {
       
       {!loading && !gameOver && (
         <QuestionCard
-        questionNr={number + 1}
-        totalQuestions={TOTAL_QUESTIONS}
-        question={questions[number]?.question}
-        answers={questions[number]?.answers} 
-        callback={checkAnswer} 
-        userAnswers={userAnswers? userAnswers[number] : undefined}
+          questionNr={number + 1}
+          totalQuestions={TOTAL_QUESTIONS}
+          question={questions[number]?.question}
+          answers={questions[number]?.answers} 
+          callback={checkAnswer} 
+          userAnswers={userAnswers? userAnswers[number] : undefined}
         />
       )}
 
