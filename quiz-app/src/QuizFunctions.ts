@@ -1,6 +1,7 @@
 import {useState} from "react"
 import { Difficulty, QuestionState, fetchQuizQuestions } from "./API";
 import { TOTAL_QUESTIONS } from "./constants";
+import { delay } from "./utils";
 
 export type AnswerObject = {
   question: string;
@@ -11,7 +12,7 @@ export type AnswerObject = {
 }
 
 export const useQuizFunctions = () => {
-  
+
     const [loading, setLoading] = useState<boolean>(false)
     const [questions, setQuestions] = useState<QuestionState[]>([])
     const [number, setNumber] = useState<number>(0)
@@ -23,6 +24,8 @@ export const useQuizFunctions = () => {
     const startTrivia = async() => {
       setLoading(true);
       setGameOver(false);
+
+      await delay(2000)
   
       const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY);
   
@@ -31,7 +34,7 @@ export const useQuizFunctions = () => {
       setUserAnswers([]);
       setNumber(0);
       setLoading(false)
-      console.log(newQuestions)
+      // console.log(newQuestions)
   
     }
   

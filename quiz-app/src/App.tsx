@@ -25,7 +25,12 @@ const App = () => {
 
       { questions.length > 0 && <p className="score">Score: {score}</p> }
       
-      {loading && <p >Loading Questions...</p>}
+      {loading && (
+        <div>
+          <h5>Sisyphus Game</h5>
+          <p >Loading Questions...</p>
+        </div>
+      )}
       
       {!loading && !gameOver && (
         <QuestionCard
