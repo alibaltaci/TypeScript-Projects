@@ -1,3 +1,4 @@
+import { Wrapper } from "./App.styles";
 import { useQuizFunctions } from "./QuizFunctions";
 import QuestionCard from "./components/QuestionCard"
 import Results from "./components/Results";
@@ -17,7 +18,7 @@ const App = () => {
   } = useQuizFunctions();
 
   return (
-    <div className="App">
+    <Wrapper>
       
       <h1>Quizzy Hub</h1>
       
@@ -49,7 +50,7 @@ const App = () => {
         <button className="next" onClick={nextQuestion}>Next Question</button>
       )} */}
 
-    </div>
+    </Wrapper>
   )
 }
 
