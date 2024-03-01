@@ -1,5 +1,6 @@
 import { Wrapper } from "./App.styles";
 import { useQuizFunctions } from "./QuizFunctions";
+import Loading from "./components/Loading";
 import QuestionCard from "./components/QuestionCard"
 import Results from "./components/Results";
 import { TOTAL_QUESTIONS } from "./constants";
@@ -27,12 +28,7 @@ const App = () => {
 
       { questions.length > 0 && <p className="score">Score: {score}</p> }
       
-      {loading && (
-        <div>
-          <h5>Sisyphus Game</h5>
-          <p >Loading Questions...</p>
-        </div>
-      )}
+      {loading && <Loading />}
       
       {!loading && !gameOver && (
         <QuestionCard

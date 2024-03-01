@@ -24,13 +24,13 @@ export const useQuizFunctions = () => {
     const startTrivia = async() => {
       setLoading(true);
       setGameOver(false);
+      setScore(0);
 
       await delay(2000)
   
       const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY);
   
       setQuestions(newQuestions);
-      setScore(0);
       setUserAnswers([]);
       setNumber(0);
       setLoading(false)
@@ -57,7 +57,7 @@ export const useQuizFunctions = () => {
         }
   
         setUserAnswers( prev => [...prev, answerObject]);
-        await delay(2000)
+        await delay(1000)
         nextQuestion()
       }
     }
