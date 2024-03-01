@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
         background-image: url(${BGImage});
         background-size: cover;
         background-position: center;
+        background-attachment: fixed;
         margin: 0;
         padding: 0 20px;
         display: flex;
@@ -66,6 +67,12 @@ export const Wrapper = styled.div`
         margin: 20px 0;
         padding: 0 40px;
         max-width: 200px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        h1 {
+            font-size: 50px;
+        }
     }
 
 `
