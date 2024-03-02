@@ -10,6 +10,7 @@ type Props = {
     questionNr: number;
     totalQuestions: number;
 }
+
 const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, userAnswers, questionNr, totalQuestions}) => {
   return (
     <QuestionCardWrapper>
@@ -22,8 +23,8 @@ const QuestionCard: FunctionComponent<Props> = ({question, answers, callback, us
                 answers?.map( el => (
                     <ButtonWrapper 
                         key={el}
-                        correct={userAnswers?.correctAnswer === el}
-                        userClicked={userAnswers?.answer === el}
+                        correct={userAnswers?.correctAnswer === el }
+                        userClicked={userAnswers?.answer === el }
                     >
                         <button disabled={!!userAnswers} value={el} onClick={callback}>
                             <span dangerouslySetInnerHTML={{__html: el}} />

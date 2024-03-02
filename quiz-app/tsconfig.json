@@ -18,7 +18,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    // styled componets
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "types": ["styled-components"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
