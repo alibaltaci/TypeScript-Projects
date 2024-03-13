@@ -1,10 +1,10 @@
-import { useState } from "react"
 
-const HangmanWord = () => {
+type HangmanWordProps = {
+  guessedLetters: string[],
+  wordToGuess: string,
+}
 
-  const word = "test"
-
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([])
+const HangmanWord = ({guessedLetters, wordToGuess}: HangmanWordProps) => {
 
   return (
     <div 
@@ -18,7 +18,7 @@ const HangmanWord = () => {
       }}
     >
       {
-        word.split("").map((letter, index) => (
+        wordToGuess.split("").map((letter, index) => (
           <span key={index} style={{borderBottom: ".1em solid black"}}>
             <span 
               style={{ 
