@@ -2,8 +2,6 @@ import Keys from "../../letterList.json";
 import styles from './Keyboard.module.css';
 
 const Keyboard = () => {
-
-  console.log(Keys)
   return (
     <div
       style={{
@@ -14,7 +12,14 @@ const Keyboard = () => {
     >
       {
         Keys.map(key => {
-          return <button className={`${styles.btn} ${styles.inactive}`} key={key}>{key}</button>
+          return (
+            <button 
+              key={key}
+              className={`${styles.btn}`} 
+            >
+              {key}
+            </button>
+          )
         })
       }
     </div>

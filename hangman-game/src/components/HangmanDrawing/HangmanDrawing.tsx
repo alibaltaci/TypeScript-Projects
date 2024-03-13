@@ -1,19 +1,17 @@
-import Body from "./Body"
-import Head from "./Head"
-import LeftArm from "./LeftArm"
-import LeftLeg from "./LeftLeg"
-import RightArm from "./RightArm"
-import RightLeg from "./RightLeg"
+import { BODY_PARTS } from "."
 
-const HangmanDrawing = () => {
+type HangmanDrawingProps = {
+    numberOfGuesses: number
+}
+
+const HangmanDrawing = ({numberOfGuesses}: HangmanDrawingProps) => {
+
   return (
     <div style={{position: "relative"}}>
-        <Head />
-        <Body />
-        <RightArm />
-        <LeftArm />
-        <RightLeg />
-        <LeftLeg />
+        {/* { BODY_PARTS.slice(0, numberOfGuesses) } */}
+        { BODY_PARTS.slice(0, numberOfGuesses).map((Part, index) => (
+            <Part key={index} />
+        ))}
         <div 
             style={{
                 height: "50px",
