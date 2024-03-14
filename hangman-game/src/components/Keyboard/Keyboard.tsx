@@ -1,7 +1,13 @@
 import Keys from "../../letterList.json";
 import styles from './Keyboard.module.css';
 
-const Keyboard = () => {
+type KeyboardProps = {
+  activeLetters: string[],
+  inactiveLetters: string[],
+  addGuessedLetter: (letter: string) => void,
+}
+
+const Keyboard = ({activeLetters, inactiveLetters, addGuessedLetter}: KeyboardProps) => {
   return (
     <div
       style={{
@@ -12,10 +18,16 @@ const Keyboard = () => {
     >
       {
         Keys.map(key => {
+
+          const isActive = activeLetters.includes(key)
+          const isInactive = inactiveLetters.includes(key)
+          
           return (
             <button 
               key={key}
-              className={`${styles.btn}`} 
+              onClick={ () => addGuessedLetter(key)}
+              className={`${styles.btn} ${isActive ? styles.active : isInactive ? styles.inactive : ""}`} 
+              disabled={isActive || isInactive}
             >
               {key}
             </button>
