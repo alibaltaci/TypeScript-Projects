@@ -119,6 +119,7 @@ function App() {
           addGuessedLetter = {addGuessedLetter}
         />
       </div>
+      <h6 style={{fontSize: "2rem", margin: 0, fontFamily: "monospace"}}>Sisyphus Game </h6>
     </div>
   )
 }
