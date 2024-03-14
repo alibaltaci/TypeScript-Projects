@@ -4,9 +4,11 @@ import { HangmanDrawing, HangmanWord, Keyboard } from "./components"
 
 function App() {
 
-  const [wordToGuess, setWordToGuess] = useState( () => {
+  const getWord = () => {
     return words[Math.floor(Math.random() * words.length)]
-  } )
+  }
+
+  const [wordToGuess, setWordToGuess] = useState( getWord )
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
 
@@ -14,8 +16,11 @@ function App() {
     letter => !wordToGuess.includes(letter)
   )
 
+  const isLoser = incorrectLetters.length >= 6;
+  const isWinner = wordToGuess.split("").every(letter => guessedLetters.includes(letter))
+
   const addGuessedLetter = useCallback((letter: string) => {
-    if(guessedLetters.includes(letter)) return
+    if(guessedLetters.includes(letter) || isLoser || isWinner) return
 
     setGuessedLetters( prev => [...prev, letter])
     
@@ -39,6 +44,30 @@ function App() {
   
   },[guessedLetters])
 
+  useEffect(()=>{
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key
+
+      if( key !== "Enter" ) return
+
+      e.preventDefault()
+      setGuessedLetters([])
+      setWordToGuess(getWord())
+    }
+
+    document.addEventListener("keypress", handler)
+
+    return () => {
+      document.removeEventListener("keypress", handler)
+    }
+  
+  },[guessedLetters])
+
+  const handleClick = () => {
+    setGuessedLetters([])
+    setWordToGuess(getWord())
+  }
+
   return (
     <div style={{
       maxWidth: "800px",
@@ -52,19 +81,37 @@ function App() {
         fontSize: "2rem",
         textAlign: "center",
       }}>
-        Lose
-        Win
+        {isWinner && "Winner! - Refresh to try again"}
+        {isLoser && "Nice Try! - Refresh to try again"}
       </div>
+
+      {
+        (isLoser || isWinner) && <button
+          style={{
+            border: "1px solid black",
+            fontSize: "2rem",
+            backgroundColor: "thistle",
+            borderRadius: "5px",
+            cursor: "pointer",
+            padding: ".5rem 2rem"
+          }} 
+          onClick={ handleClick }
+        >
+          Refresh
+        </button>
+      }
       
       <HangmanDrawing 
         numberOfGuesses={incorrectLetters.length} 
       />
       <HangmanWord 
+        reveal={isLoser}
         guessedLetters={guessedLetters} 
         wordToGuess={wordToGuess} 
       />
       <div style={{alignSelf:"stretch"}}>
         <Keyboard
+          disabled={isLoser || isWinner}
           activeLetters = {guessedLetters.filter(letter => 
             wordToGuess.includes(letter)  
           )}
@@ -72,7 +119,6 @@ function App() {
           addGuessedLetter = {addGuessedLetter}
         />
       </div>
-
     </div>
   )
 }

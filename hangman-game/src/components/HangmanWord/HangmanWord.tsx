@@ -2,9 +2,10 @@
 type HangmanWordProps = {
   guessedLetters: string[],
   wordToGuess: string,
+  reveal?:boolean,
 }
 
-const HangmanWord = ({guessedLetters, wordToGuess}: HangmanWordProps) => {
+const HangmanWord = ({reveal=false, guessedLetters, wordToGuess}: HangmanWordProps) => {
 
   return (
     <div 
@@ -22,9 +23,10 @@ const HangmanWord = ({guessedLetters, wordToGuess}: HangmanWordProps) => {
           <span key={index} style={{borderBottom: ".1em solid black"}}>
             <span 
               style={{ 
-                visibility: guessedLetters.includes(letter) 
+                visibility: guessedLetters.includes(letter) || reveal
                 ? "visible"
-                :"hidden"  
+                :"hidden",
+                color: !guessedLetters.includes(letter) && reveal ? "red" : "green"
               }}
             >
               {letter}
