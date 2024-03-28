@@ -1,7 +1,6 @@
 import {Button, Container, Nav, Navbar as NavbarBs} from "react-bootstrap"
 import { NavLink } from "react-router-dom"
-import navData from "../../data/navbar.json"
-
+import { navbarData } from "../../data/moduleData.ts"
 
 const Navbar = () => {
   return (
@@ -9,7 +8,7 @@ const Navbar = () => {
         <Container >
             <Nav className="me-auto">
                 {
-                    navData.map((el: {
+                    navbarData.map((el: {
                         to: string;
                         page: string;
                     }) => {

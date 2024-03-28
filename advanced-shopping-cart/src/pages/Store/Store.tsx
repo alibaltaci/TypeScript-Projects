@@ -1,7 +1,12 @@
+import { storePageData } from "../../data/moduleData"
 
 const Store = () => {
+
+  console.log(storePageData)
   return (
-    <div>Store</div>
+    <>
+      <h1>{storePageData.pageTitle}</h1>
+    </>
   )
 }
 
