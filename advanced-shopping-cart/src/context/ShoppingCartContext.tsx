@@ -9,14 +9,14 @@ type CartItem = {
     quantity: number
 } 
 
-type ShoppingCartContextProps = {
+type ShoppingCartContext = {
     getItemQuantity: (id: number) => number
     increaseCartQuantity: (id: number) => void
     decreaseCartQuantity: (id: number) => void
     removeFromCart: (id: number) => void
 }
 
-const ShoppingCartContext = createContext({} as ShoppingCartContextProps)
+const ShoppingCartContext = createContext({} as ShoppingCartContext)
 
 export const useShoppingCart = () => {
     return useContext(ShoppingCartContext)
@@ -30,21 +30,22 @@ export const ShoppingCartProvider = ({children}:ShoppingCartProviderProps) => {
         return cartItems?.find(item => item.id === id)?.quantity || 0
     }
 
-    const increaseCartQuantity =(id:number) => {
-        setCartItems( currentItems => {
-            if( currentItems?.find(item => item.id === id) === null ){
-                return [...currentItems, {id, quantity: 1}]
-            }else{
-                return currentItems?.map( item =>{
-                    if(item.id === id){
-                        return {...item, quantity: item.quantity + 1 }
-                    }else{
-                        return item
+    const increaseCartQuantity = (id: number) => {
+        setCartItems(currentItems => {
+            if (!currentItems?.find(item => item.id === id)) {
+                return [...currentItems, { id, quantity: 1 }];
+            } else {
+                return currentItems?.map(item => {
+                    if (item.id === id) {
+                        return { ...item, quantity: item.quantity + 1 };
+                    } else {
+                        return item;
                     }
-                })
+                });
             }
-    })
-    }
+        });
+    };
+    
 
     const decreaseCartQuantity = (id: number) => {
         setCartItems( currentItems => {
