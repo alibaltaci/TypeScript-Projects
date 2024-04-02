@@ -18,13 +18,13 @@ const ShoppingCart = ({isOpen}: ShoppingCartProps) => {
                 Cart
             </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body  >
             <Stack gap={3}>
                 {cartItems.map( item => (
                     <CartItem key={item.id} {...item} />
                 ))}
             </Stack>
-            <div className="ms-auto fw-bold fs-5">
+            <div className="fw-bold fs-5 text-end mt-4">
                 Total: { formatCurrency( cartItems.reduce( ( total, el ) => {
                     const item = storePageDataItems.find( i => i.id === el.id )
                     return total + (item?.price || 0) * el.quantity
